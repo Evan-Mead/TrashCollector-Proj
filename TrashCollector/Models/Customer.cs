@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TrashCollector.Models
 {
@@ -12,7 +8,7 @@ namespace TrashCollector.Models
     {
         [Key]
         public int CustomerId { get; set; }
-        public string CustomerName { get; set; } 
+        public string CustomerName { get; set; }
         public string CustomerStreet { get; set; }
         public string CustomerCity { get; set; }
         public string CustomerState { get; set; }
