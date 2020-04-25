@@ -1,37 +1,34 @@
-﻿@model IEnumerable<TrashCollector.Models.Employee>
+﻿@model TrashCollector.Models.EmployeeCustomersViewModel
 
 @{
     ViewData["Title"] = "Employee Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Employees</h3>
+<h3>Welcome @Model.Employee.Name</h3>
 
-<p>
-    <a asp-action="Create">Create New Employee</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Customers[0].CustomerName)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.EmployeeZipCode)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
-            <th></th>
+            <th></th>*@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Customers) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.CustomerName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.EmployeeZipCode)
             </td>
             <td>
@@ -41,7 +38,7 @@
                 <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.EmployeeId">View Info</a> |
                 <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
-            </td>
+            </td>*@
         </tr>
 }
     </tbody>

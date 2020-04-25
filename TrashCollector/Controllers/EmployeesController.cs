@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TrashCollector.Data;
 using TrashCollector.Models;
@@ -20,8 +22,12 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Employees.Include(e => e.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            EmployeeCustomersViewModel employeeCustomersViewModel = new EmployeeCustomersViewModel();
+
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            employeeCustomersViewModel.Employee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            employeeCustomersViewModel.Customers = _context.Customers.Where(c => c.CustomerZipCode == employeeCustomersViewModel.Employee.EmployeeZipCode).ToList();
+            return View(employeeCustomersViewModel);
         }
 
         // GET: Employees/Details/5
