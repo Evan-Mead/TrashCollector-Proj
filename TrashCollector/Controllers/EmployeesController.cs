@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -27,6 +27,18 @@ namespace TrashCollector.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             employeeCustomersViewModel.Employee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             employeeCustomersViewModel.Customers = _context.Customers.Where(c => c.CustomerZipCode == employeeCustomersViewModel.Employee.EmployeeZipCode).ToList();
+            employeeCustomersViewModel.DaysToSelect = new SelectList(new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"});
+            return View(employeeCustomersViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(EmployeeCustomersViewModel employeeCustomersViewModel)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            employeeCustomersViewModel.Employee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            employeeCustomersViewModel.Customers = _context.Customers.Where(c => c.CustomerZipCode == employeeCustomersViewModel.Employee.EmployeeZipCode && c.TrashDay == employeeCustomersViewModel.SelectedDay).ToList();
+            employeeCustomersViewModel.DaysToSelect = new SelectList(new List<string>() { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" });
             return View(employeeCustomersViewModel);
         }
 
@@ -61,7 +73,7 @@ namespace TrashCollector.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeId,Name,EmployeeZipCode,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Create([Bind("EmployeeId,Name,Zip Code,IdentityUserId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +107,7 @@ namespace TrashCollector.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,Name,EmployeeZipCode,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,Name,Zip Code,IdentityUserId")] Employee employee)
         {
             if (id != employee.EmployeeId)
             {

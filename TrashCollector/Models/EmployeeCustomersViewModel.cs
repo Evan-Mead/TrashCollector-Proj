@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TrashCollector.Models
 {
@@ -9,5 +7,7 @@ namespace TrashCollector.Models
     {
         public Employee Employee { get; set; }
         public List<Customer> Customers { get; set; }
+        public string SelectedDay { get; set; }
+        public SelectList DaysToSelect { get; set; }
     }
 }
