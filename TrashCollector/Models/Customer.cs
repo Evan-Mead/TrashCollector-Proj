@@ -15,7 +15,7 @@ namespace TrashCollector.Models
         public string CustomerZipCode { get; set; }
         public string TrashDay { get; set; }
         public string ExtraPickUpRequest { get; set; }
-        public double AccountBalance { get; }
+        public double AccountBalance { get; set; }
         public string TemporarySuspendPickUp { get; set; }
 
         [ForeignKey("IdentityUser")]

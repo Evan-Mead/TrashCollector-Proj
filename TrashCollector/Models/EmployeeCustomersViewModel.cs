@@ -9,5 +9,6 @@ namespace TrashCollector.Models
         public List<Customer> Customers { get; set; }
         public string SelectedDay { get; set; }
         public SelectList DaysToSelect { get; set; }
+        public bool ConfirmPickUp { get; set; }
     }
 }
