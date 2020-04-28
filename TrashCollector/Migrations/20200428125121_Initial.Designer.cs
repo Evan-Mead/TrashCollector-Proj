@@ -10,7 +10,7 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200423194139_Initial")]
+    [Migration("20200428125121_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,10 +50,17 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8a646bb2-5b38-48c8-b1ea-24a429d4f086",
-                            ConcurrencyStamp = "f9f837b4-ece4-4bc8-a8cf-2f092edaecb0",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Id = "6e456fae-fd32-4ecb-82d1-a35ac95e5a0b",
+                            ConcurrencyStamp = "64a4cbb0-096f-4c8d-a99c-6eb166cfea34",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = "23e3acbf-ffa9-41ef-b9f1-9083a6b5bd8c",
+                            ConcurrencyStamp = "d41c2781-f096-47c6-9db3-7ca135b115c9",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
                         });
                 });
 
@@ -232,6 +239,9 @@ namespace TrashCollector.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("AccountBalance")
+                        .HasColumnType("float");
 
                     b.Property<string>("CustomerCity")
                         .HasColumnType("nvarchar(max)");

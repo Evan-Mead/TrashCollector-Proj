@@ -113,7 +113,10 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        //redirect to customer or employee create actions.
+
+                        Response.Redirect("~/Customer/Create");
+                        //Response.Redirect("~/Employee/Create");
                     }
                 }
                 foreach (var error in result.Errors)

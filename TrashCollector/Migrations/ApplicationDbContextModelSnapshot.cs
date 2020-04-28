@@ -44,6 +44,22 @@ namespace TrashCollector.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6e456fae-fd32-4ecb-82d1-a35ac95e5a0b",
+                            ConcurrencyStamp = "64a4cbb0-096f-4c8d-a99c-6eb166cfea34",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = "23e3acbf-ffa9-41ef-b9f1-9083a6b5bd8c",
+                            ConcurrencyStamp = "d41c2781-f096-47c6-9db3-7ca135b115c9",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -221,6 +237,9 @@ namespace TrashCollector.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("AccountBalance")
+                        .HasColumnType("float");
 
                     b.Property<string>("CustomerCity")
                         .HasColumnType("nvarchar(max)");
