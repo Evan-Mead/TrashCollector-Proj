@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -23,6 +24,9 @@ namespace TrashCollector.Controllers
         public async Task<IActionResult> Index()
         {
             EmployeeCustomersViewModel employeeCustomersViewModel = new EmployeeCustomersViewModel();
+            EmployeePickUpTrashModel employeePickUpTrashModel = new EmployeePickUpTrashModel();
+
+            DateTime today = DateTime.Today;
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             employeeCustomersViewModel.Employee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();

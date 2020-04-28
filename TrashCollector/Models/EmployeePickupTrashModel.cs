@@ -7,9 +7,8 @@ namespace TrashCollector.Models
 {
     public class EmployeePickUpTrashModel
     {
+        public Employee Employee { get; set; }
+        public List<Customer> Customers { get; set; }
         public DateTime PickUpDate { get; set; }
-        public int CustomerId { get; set; }
-        public int EmployeeId { get; set; }
-        public string CompletedPickUpMessage { get; set; }
     }
 }
