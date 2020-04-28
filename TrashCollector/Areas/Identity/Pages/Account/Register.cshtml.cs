@@ -110,14 +110,18 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                     }
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    if (Input.Role.Equals("Customer"))
+                    {
+                        return RedirectToAction("Create", "Customers");
+                    }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        //redirect to customer or employee create actions.
-
-                        Response.Redirect("~/Customer/Create");
-                        //Response.Redirect("~/Employee/Create");
+                        return RedirectToAction("Create", "Employees");
                     }
+
                 }
                 foreach (var error in result.Errors)
                 {
